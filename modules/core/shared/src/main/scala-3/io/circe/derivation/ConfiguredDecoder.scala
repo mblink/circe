@@ -219,7 +219,7 @@ object ConfiguredDecoder:
       case _: Mirror.SumOf[A]     => true
     })
 
-  inline final def derived[A](using conf: Configuration, mirror: Mirror.Of[A]): ConfiguredDecoder[A] =
+  inline final def derived[A](using conf: Configuration, inline mirror: Mirror.Of[A]): ConfiguredDecoder[A] =
     ConfiguredDecoder.of[A](constValue[mirror.MirroredLabel], decoders[A], summonLabels[mirror.MirroredElemLabels])
 
   inline final def derive[A: Mirror.Of](
